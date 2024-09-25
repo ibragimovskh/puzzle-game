@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Game - Level 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            text-align: center;
+        }
+        .grid {
+            display: inline-grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .cell {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .cell:hover {
+            background-color: #e0e0e0;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Number Game - Level 1</h1>
+        <p>Place numbers from 2 to 25 in ascending order. They must be adjacent to the previous number.</p>
+        <div id="grid" class="grid"></div>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        class NumberGame {
+            constructor() {
+                this.grid = Array(5).fill().map(() => Array(5).fill(0));
+                this.currentNumber = 1;
+                this.initializeGame();
+            }
+
+            initializeGame() {
+                const row = Math.floor(Math.random() * 5);
+                const col = Math.floor(Math.random() * 5);
+                this.grid[row][col] = 1;
+                this.currentNumber = 2;
+                this.renderGrid();
+            }
+
+            isAdjacent(row, col) {
+                for (let i = Math.max(0, row - 1); i < Math.min(5, row + 2); i++) {
+                    for (let j = Math.max(0, col - 1); j < Math.min(5, col + 2); j++) {
+                        if (this.grid[i][j] === this.currentNumber - 1) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            placeNumber(row, col) {
+                if (this.grid[row][col] !== 0) {
+                    return "Cell is not empty. Choose an empty cell.";
+                }
+                if (!this.isAdjacent(row, col)) {
+                    return "Not adjacent to the previous number. Choose an adjacent cell.";
+                }
+                
+                this.grid[row][col] = this.currentNumber;
+                this.currentNumber++;
+                this.renderGrid();
+                
+                if (this.currentNumber > 25) {
+                    return "Congratulations! You've completed Level 1.";
+                }
+                return `Placed ${this.currentNumber - 1}. Now place ${this.currentNumber}.`;
+            }
+
+            renderGrid() {
+                const gridElement = document.getElementById('grid');
+                gridElement.innerHTML = '';
+                for (let i = 0; i < 5; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        const cell = document.createElement('div');
+                        cell.className = 'cell';
+                        cell.textContent = this.grid[i][j] || '';
+                        cell.onclick = () => this.handleCellClick(i, j);
+                        gridElement.appendChild(cell);
+                    }
+                }
+            }
+
+            handleCellClick(row, col) {
+                const message = this.placeNumber(row, col);
+                document.getElementById('message').textContent = message;
+            }
+        }
+
+        const game = new NumberGame();
+    </script>
+</body>
+</html>
