@@ -5,43 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Game - Level 1</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .game-container {
-            text-align: center;
-        }
-        .grid {
-            display: inline-grid;
-            grid-template-columns: repeat(5, 60px);
-            gap: 5px;
-            margin-bottom: 20px;
-        }
-        .cell {
-            width: 60px;
-            height: 60px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        .cell:hover {
-            background-color: #e0e0e0;
-        }
-        #message {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background-color: #f0f8ff;
+      }
+      .game-container {
+          text-align: center;
+          background-color: white;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+          color: #2c3e50;
+          margin-bottom: 20px;
+      }
+      p {
+          color: #34495e;
+          margin-bottom: 25px;
+      }
+      .grid {
+          display: inline-grid;
+          grid-template-columns: repeat(5, 70px);
+          gap: 8px;
+          margin-bottom: 25px;
+      }
+      .cell {
+          width: 70px;
+          height: 70px;
+          background-color: #ecf0f1;
+          border: 2px solid #bdc3c7;
+          border-radius: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 24px;
+          font-weight: bold;
+          color: #2c3e50;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+      .cell:hover {
+          background-color: #d5dbdb;
+          transform: scale(1.05);
+      }
+      #message {
+          margin-top: 25px;
+          font-weight: bold;
+          color: #27ae60;
+          font-size: 18px;
+      }
+  </style>
 </head>
 <body>
     <div class="game-container">
